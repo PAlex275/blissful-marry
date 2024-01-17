@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "560995509988",
+    "project_id": "blissful-marry",
+    "storage_bucket": "blissful-marry.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560995509988:android:98718ab85530bb02c62ef1",
+        "android_client_info": {
+          "package_name": "com.example.blissful_marry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560995509988-hekg5pl6jik33to6g8mcmg7elehfv4ol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjOS1i899sSp3RtC_3EV7zMnRd6RH5bn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560995509988-hekg5pl6jik33to6g8mcmg7elehfv4ol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
