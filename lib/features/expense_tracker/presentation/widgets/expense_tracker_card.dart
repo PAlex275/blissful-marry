@@ -15,8 +15,8 @@ class ExpenseTrackerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: nude,
+        borderRadius: BorderRadius.circular(10),
+        color: light,
       ),
       width: context.width * 0.9,
       height: height ?? 150,

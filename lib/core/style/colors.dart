@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 // const comb51 = Color.fromRGBO(135, 206, 235, 1);
 
 const softIvory = Color.fromRGBO(247, 247, 242, 1);
-const ivory = Color(0xffede9e3);
+const ivory = Color(0xffFCFCFB);
 const nude = Color(0xffe7d7c9);
 const dustyRose = Color(0xffd4b2a7);
+const light = Color(0xffede9e3);

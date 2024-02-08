@@ -6,10 +6,20 @@ class HomeController extends GetxController {
     FirebaseFirestore.instance
         .collection('Users')
         .doc(controller.getUser()!.email)
-        .collection("Wedding")
+        .collection("Nunta")
         .doc(snapshot.data!.docs.first.id)
         .update({
-      "wedding_date": dateTime,
+      "data_nuntii": dateTime,
+    });
+  }
+
+  addWeddingDate(DateTime dateTime, controller, snapshot) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(controller.getUser()!.email)
+        .collection("Nunta")
+        .add({
+      "data_nuntii": dateTime,
     });
   }
 }

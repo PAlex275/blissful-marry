@@ -79,18 +79,19 @@ class NavigationSideBar extends GetView<AuthController> {
   Widget buildMenuItems(BuildContext context) => Container(
         color: ivory,
         child: Wrap(
-          runSpacing: 10,
+          runSpacing: 8,
           children: [
             ListTile(
               leading: const Icon(
                 Icons.home,
+                size: 25,
                 color: Colors.black,
               ),
               title: Text(
                 'Home',
                 style: GoogleFonts.roboto(
                   fontWeight: FontWeight.w500,
-                  fontSize: 15,
+                  fontSize: 13,
                   color: Colors.black,
                 ),
               ),
@@ -102,13 +103,14 @@ class NavigationSideBar extends GetView<AuthController> {
             ListTile(
               leading: const Icon(
                 Icons.people,
+                size: 25,
                 color: Colors.black,
               ),
               title: Text(
                 'Gestionarea Invitați',
                 style: GoogleFonts.roboto(
                   fontWeight: FontWeight.w500,
-                  fontSize: 15,
+                  fontSize: 13,
                   color: Colors.black,
                 ),
               ),
@@ -120,13 +122,14 @@ class NavigationSideBar extends GetView<AuthController> {
             ListTile(
               leading: const Icon(
                 Icons.table_bar,
+                size: 25,
                 color: Colors.black,
               ),
               title: Text(
                 'Gestionarea Meselor',
                 style: GoogleFonts.roboto(
                   fontWeight: FontWeight.w500,
-                  fontSize: 15,
+                  fontSize: 13,
                   color: Colors.black,
                 ),
               ),
@@ -138,13 +141,14 @@ class NavigationSideBar extends GetView<AuthController> {
             ListTile(
               leading: const Icon(
                 Icons.notes,
+                size: 25,
                 color: Colors.black,
               ),
               title: Text(
                 'Notițe',
                 style: GoogleFonts.roboto(
                   fontWeight: FontWeight.w500,
-                  fontSize: 15,
+                  fontSize: 13,
                   color: Colors.black,
                 ),
               ),
@@ -156,13 +160,14 @@ class NavigationSideBar extends GetView<AuthController> {
             ListTile(
               leading: const Icon(
                 Icons.attach_money,
+                size: 25,
                 color: Colors.black,
               ),
               title: Text(
                 'Buget și Cheltuieli',
                 style: GoogleFonts.roboto(
                   fontWeight: FontWeight.w500,
-                  fontSize: 15,
+                  fontSize: 13,
                   color: Colors.black,
                 ),
               ),
@@ -174,13 +179,14 @@ class NavigationSideBar extends GetView<AuthController> {
             ListTile(
               leading: const Icon(
                 Icons.subscriptions_outlined,
+                size: 25,
                 color: Colors.black,
               ),
               title: Text(
                 'Abonamentul Tău',
                 style: GoogleFonts.roboto(
                   fontWeight: FontWeight.w500,
-                  fontSize: 15,
+                  fontSize: 13,
                   color: Colors.black,
                 ),
               ),
@@ -197,13 +203,14 @@ class NavigationSideBar extends GetView<AuthController> {
               child: ListTile(
                 leading: const Icon(
                   Icons.logout,
+                  size: 25,
                   color: Colors.black,
                 ),
                 title: Text(
                   'Deconectează-te',
                   style: GoogleFonts.roboto(
                     fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                    fontSize: 13,
                     color: Colors.black,
                   ),
                 ),

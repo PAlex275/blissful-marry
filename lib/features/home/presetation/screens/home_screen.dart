@@ -25,6 +25,7 @@ class HomeScreen extends GetView<AuthController> {
         child: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -32,101 +33,6 @@ class HomeScreen extends GetView<AuthController> {
                 ),
                 child: DaysCounter(),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     vertical: 10,
-              //     horizontal: 30,
-              //   ),
-              //   child: Container(
-              //     height: 140,
-              //     width: MediaQuery.of(context).size.width,
-              //     decoration: const BoxDecoration(
-              //       color: nude,
-              //       borderRadius: BorderRadius.only(
-              //         topLeft: Radius.circular(
-              //           50,
-              //         ),
-              //         bottomRight: Radius.circular(
-              //           50,
-              //         ),
-              //       ),
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(12.0),
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Padding(
-              //             padding: const EdgeInsets.only(
-              //               left: 10,
-              //             ),
-              //             child: Text(
-              //               'Total Cheltuieli',
-              //               style: GoogleFonts.dancingScript(
-              //                 color: Colors.black,
-              //                 fontSize: 27,
-              //                 fontWeight: FontWeight.w600,
-              //               ),
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     vertical: 10,
-              //     horizontal: 30,
-              //   ),
-              //   child: Container(
-              //     height: 140,
-              //     width: MediaQuery.of(context).size.width,
-              //     decoration: const BoxDecoration(
-              //       color: nude,
-              //       borderRadius: BorderRadius.only(
-              //         topRight: Radius.circular(
-              //           50,
-              //         ),
-              //         bottomLeft: Radius.circular(
-              //           50,
-              //         ),
-              //       ),
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(12.0),
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           Padding(
-              //             padding: const EdgeInsets.only(
-              //               left: 10,
-              //             ),
-              //             child: Text(
-              //               'Total Cheltuieli',
-              //               style: GoogleFonts.dancingScript(
-              //                 color: Colors.black,
-              //                 fontSize: 27,
-              //                 fontWeight: FontWeight.w600,
-              //               ),
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     vertical: 20,
-              //   ),
-              //   child: Image.asset(
-              //     'assets/images/wave.png',
-              //     width: MediaQuery.of(context).size.width * 0.85,
-              //     height: 150,
-              //     fit: BoxFit.cover,
-              //   ),
-              // ),
             ],
           ),
         ),

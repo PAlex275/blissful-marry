@@ -17,10 +17,10 @@ class DaysCounter extends GetView<AuthController> {
     final homeController = Get.put(HomeController());
     DateTime weddingDate = DateTime.now();
     return Container(
-      width: MediaQuery.of(context).size.width * 0.85,
-      height: 150,
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: 120,
       decoration: BoxDecoration(
-        color: nude,
+        color: light,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Stack(
@@ -34,7 +34,7 @@ class DaysCounter extends GetView<AuthController> {
               stream: FirebaseFirestore.instance
                   .collection('Users')
                   .doc(controller.getUser()!.email)
-                  .collection("Wedding")
+                  .collection("Nunta")
                   .snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -47,7 +47,7 @@ class DaysCounter extends GetView<AuthController> {
                 if (snapshot.hasData) {
                   snapshot.data!.docs.isNotEmpty
                       ? weddingDate = DateTime.parse(snapshot
-                          .data!.docs.first["wedding_date"]
+                          .data!.docs.first["data_nuntii"]
                           .toDate()
                           .toString())
                       : null;
@@ -111,6 +111,7 @@ class DaysCounter extends GetView<AuthController> {
                                           child: Icon(
                                             Icons.edit,
                                             size: 22,
+                                            color: Colors.black,
                                           ),
                                         ),
                                       ),
@@ -123,23 +124,165 @@ class DaysCounter extends GetView<AuthController> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  daysRemaining == 0
-                                      ? 'Începeți o nouă călătorie: Acum sunteți soț și soție! '
-                                      : daysRemaining < 0
-                                          ? daysRemaining == -1
-                                              ? 'Acum ${0 - daysRemaining} zi, v-ați unit destinele și ați început să scrieți povestea voastră de dragoste.'
-                                              : 'Acum ${0 - daysRemaining} zile, v-ați unit destinele și ați început să scrieți povestea voastră de dragoste.'
-                                          : daysRemaining == 1
-                                              ? 'Ne apropiem pas cu pas: Doar $daysRemaining zi până la marea zi! '
-                                              : 'Ne apropiem pas cu pas: Doar $daysRemaining zile până la marea zi! ',
-                                  style: GoogleFonts.dancingScript(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                daysRemaining == 0
+                                    ? Text(
+                                        'Începeți o nouă călătorie: Acum sunteți soț și soție!',
+                                        style: GoogleFonts.robotoSerif(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                          color: Colors.black,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      )
+                                    : daysRemaining < 0
+                                        ? daysRemaining == -1
+                                            ? RichText(
+                                                textAlign: TextAlign.center,
+                                                text: TextSpan(
+                                                    text: 'Acum ',
+                                                    style:
+                                                        GoogleFonts.robotoSerif(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      color: Colors.black,
+                                                    ),
+                                                    children: [
+                                                      TextSpan(
+                                                        text:
+                                                            '${0 - daysRemaining} zi',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            ', v-ați unit destinele și ați început să scrieți povestea voastră de dragoste.',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ]),
+                                              )
+                                            : RichText(
+                                                textAlign: TextAlign.center,
+                                                text: TextSpan(
+                                                    text: 'Acum ',
+                                                    style:
+                                                        GoogleFonts.robotoSerif(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w200,
+                                                      color: Colors.black,
+                                                    ),
+                                                    children: [
+                                                      TextSpan(
+                                                        text:
+                                                            '${0 - daysRemaining} zile ',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            ', v-ați unit destinele și ați început să scrieți povestea voastră de dragoste.',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w200,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ]),
+                                              )
+                                        : daysRemaining == 1
+                                            ? RichText(
+                                                textAlign: TextAlign.center,
+                                                text: TextSpan(
+                                                    text:
+                                                        'Ne apropiem pas cu pas:\n Doar ',
+                                                    style:
+                                                        GoogleFonts.robotoSerif(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w200,
+                                                      color: Colors.black,
+                                                    ),
+                                                    children: [
+                                                      TextSpan(
+                                                        text:
+                                                            '$daysRemaining zi ',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            'până la marea zi!',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w200,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ]),
+                                              )
+                                            : RichText(
+                                                textAlign: TextAlign.center,
+                                                text: TextSpan(
+                                                    text:
+                                                        'Ne apropiem pas cu pas:\n Doar ',
+                                                    style:
+                                                        GoogleFonts.robotoSerif(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w200,
+                                                      color: Colors.black,
+                                                    ),
+                                                    children: [
+                                                      TextSpan(
+                                                        text:
+                                                            '$daysRemaining  zile',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            ' până la marea zi! ',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w200,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    ]),
+                                              ),
                               ],
                             ),
                             const SizedBox(
@@ -147,62 +290,68 @@ class DaysCounter extends GetView<AuthController> {
                             ),
                           ],
                         )
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Add your Wedding Date',
-                              style: GoogleFonts.nunito(
-                                fontSize: 25,
-                                color: Colors.black,
+                      : Padding(
+                          padding: const EdgeInsets.only(left: 40),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Adaugati data nuntii',
+                                style: GoogleFonts.robotoSerif(
+                                  fontSize: 23,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: dustyRose),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: InkWell(
-                                  onTap: () => showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime.now(),
-                                          lastDate: DateTime(2030))
-                                      .then((value) => {
-                                            if (value != null)
-                                              {
-                                                homeController
-                                                    .updateWeddingDate(
-                                                  value,
-                                                  controller,
-                                                  snapshot,
-                                                )
-                                              }
-                                          }),
-                                  child: Text(
-                                    'Add Date',
-                                    style: GoogleFonts.nunito(
-                                      fontSize: 18,
-                                      color: Colors.black,
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                      color: Colors.white,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(7.0),
+                                  child: InkWell(
+                                    onTap: () => showDatePicker(
+                                            context: context,
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime.now(),
+                                            lastDate: DateTime(2030))
+                                        .then((value) => {
+                                              if (value != null)
+                                                {
+                                                  homeController.addWeddingDate(
+                                                    value,
+                                                    controller,
+                                                    snapshot,
+                                                  )
+                                                }
+                                            }),
+                                    child: Text(
+                                      'Adauga',
+                                      style: GoogleFonts.robotoSerif(
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                 }
 
                 return Container(
                   color: dustyRose,
                   child: Text(
-                    'Add Your Wedding Date',
-                    style: GoogleFonts.nunito(
+                    'Adaugati data nuntii',
+                    style: GoogleFonts.robotoSerif(
                       fontSize: 25,
                       color: Colors.white,
                     ),
