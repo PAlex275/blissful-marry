@@ -93,14 +93,20 @@ class _WeddingTableState extends State<WeddingTable> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
+                              backgroundColor: light,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(10),
                                 ),
                               ),
                               scrollable: true,
-                              title: const Text(
+                              title: Text(
                                 'Invitat',
+                                style: GoogleFonts.robotoSerif(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
                               ),
                               content: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -110,6 +116,11 @@ class _WeddingTableState extends State<WeddingTable> {
                                       Form(
                                         key: formKey,
                                         child: TextFormField(
+                                          style: GoogleFonts.robotoSerif(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.black,
+                                          ),
                                           controller: tableNameController,
                                           validator: (text) {
                                             if (text == null || text.isEmpty) {
@@ -117,28 +128,53 @@ class _WeddingTableState extends State<WeddingTable> {
                                             }
                                             return null;
                                           },
-                                          decoration: const InputDecoration(
+                                          decoration: InputDecoration(
                                             labelText: 'Nume Masa',
-                                            icon: Icon(Icons.account_box),
+                                            labelStyle: GoogleFonts.robotoSerif(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.black,
+                                            ),
+                                            icon: const Icon(
+                                              Icons.account_box,
+                                              color: Colors.black,
+                                            ),
                                           ),
                                         ),
                                       ),
                                       const SizedBox(
                                         height: 30,
                                       ),
-                                      const Text('Locuri'),
+                                      Text(
+                                        'Locuri',
+                                        style: GoogleFonts.robotoSerif(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                       Padding(
                                         padding: const EdgeInsets.all(8),
                                         child: DropdownButtonFormField(
                                           elevation: 2,
+                                          dropdownColor: light,
                                           value: tableSize,
                                           icon: const Icon(
-                                              Icons.keyboard_arrow_down),
+                                            Icons.keyboard_arrow_down,
+                                            color: Colors.black,
+                                          ),
                                           items: SeatManagement.items
                                               .map((int item) {
                                             return DropdownMenuItem<int>(
                                               value: item,
-                                              child: Text(item.toString()),
+                                              child: Text(
+                                                item.toString(),
+                                                style: GoogleFonts.robotoSerif(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
                                             );
                                           }).toList(),
                                           onChanged: (int? newValue) {
@@ -156,24 +192,13 @@ class _WeddingTableState extends State<WeddingTable> {
                               ),
                               actions: [
                                 TextButton(
-                                  onPressed: () {
-                                    Get.close(1);
-                                  },
-                                  child: Text(
-                                    'Anuleaza',
-                                    style: GoogleFonts.robotoSerif(
-                                      fontSize: 15,
-                                      color: Colors.white.withOpacity(0.8),
-                                    ),
-                                  ),
-                                ),
-                                TextButton(
                                   child: Text(
                                     "Actualizeaza",
                                     style: GoogleFonts.robotoSerif(
-                                        fontSize: 15,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                   onPressed: () {
                                     setState(() {});
@@ -203,7 +228,20 @@ class _WeddingTableState extends State<WeddingTable> {
                                               });
                                     }
                                   },
-                                )
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Get.close(1);
+                                  },
+                                  child: Text(
+                                    'Anuleaza',
+                                    style: GoogleFonts.robotoSerif(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
                               ],
                             );
                           },
@@ -351,75 +389,104 @@ class _WeddingTableState extends State<WeddingTable> {
                         child: IconButton(
                           onPressed: () {
                             showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(10),
-                                      ),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: light,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
                                     ),
-                                    scrollable: true,
-                                    title: const Text(
-                                      'Invitat',
+                                  ),
+                                  scrollable: true,
+                                  title: Text(
+                                    'Invitat',
+                                    style: GoogleFonts.robotoSerif(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    content: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Form(
-                                        child: Column(
-                                          children: <Widget>[
-                                            TextFormField(
-                                              controller: nameController,
-                                              decoration: const InputDecoration(
-                                                labelText: 'Nume',
-                                                icon: Icon(Icons.account_box),
+                                  ),
+                                  content: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Form(
+                                      child: Column(
+                                        children: <Widget>[
+                                          TextFormField(
+                                            controller: nameController,
+                                            decoration: InputDecoration(
+                                              labelText: 'Nume',
+                                              labelStyle:
+                                                  GoogleFonts.robotoSerif(
+                                                fontSize: 16,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              icon: const Icon(
+                                                Icons.account_box,
+                                                color: Colors.black,
                                               ),
                                             ),
-                                            const SizedBox(
-                                              height: 30,
-                                            ),
-                                          ],
-                                        ),
+                                          ),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    actions: [
-                                      TextButton(
-                                        child: Text(
-                                          "Adauga",
-                                          style: GoogleFonts.robotoSerif(
-                                              fontSize: 15,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: Text(
+                                        "Adauga",
+                                        style: GoogleFonts.robotoSerif(
+                                          fontSize: 15,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
                                         ),
-                                        onPressed: () {
-                                          if (nameController.text != '') {
-                                            guests.add(nameController.text);
-                                            FirebaseFirestore.instance
-                                                .collection('Users')
-                                                .doc(
-                                                    controller.getUser()!.email)
-                                                .collection("Nunta")
-                                                .doc("Mese")
-                                                .collection("Mese")
-                                                .doc(widget.doc.id)
-                                                .update({'Invitati': guests})
-                                                .then((value) => {
-                                                      nameController.clear(),
-                                                      Get.close(1),
-                                                      setState(() {}),
-                                                      widget.voidCallback(),
-                                                    })
-                                                .catchError((error) => {
-                                                      // ignore: avoid_print
-                                                      print(
-                                                          "Failed to add new Note due to $error")
-                                                    });
-                                          }
-                                        },
-                                      )
-                                    ],
-                                  );
-                                });
+                                      ),
+                                      onPressed: () {
+                                        if (nameController.text != '') {
+                                          guests.add(nameController.text);
+                                          FirebaseFirestore.instance
+                                              .collection('Users')
+                                              .doc(controller.getUser()!.email)
+                                              .collection("Nunta")
+                                              .doc("Mese")
+                                              .collection("Mese")
+                                              .doc(widget.doc.id)
+                                              .update({'Invitati': guests})
+                                              .then((value) => {
+                                                    nameController.clear(),
+                                                    Get.close(1),
+                                                    setState(() {}),
+                                                    widget.voidCallback(),
+                                                  })
+                                              .catchError((error) => {
+                                                    // ignore: avoid_print
+                                                    print(
+                                                        "Failed to add new Note due to $error")
+                                                  });
+                                        }
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text(
+                                        "Anuleaza",
+                                        style: GoogleFonts.robotoSerif(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Get.close(1);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           },
                           icon: const Icon(
                             Icons.add,

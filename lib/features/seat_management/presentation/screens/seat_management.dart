@@ -335,7 +335,19 @@ class _SeatManagementState extends State<SeatManagement> {
                                 });
                       }
                     },
-                  )
+                  ),
+                  TextButton(
+                    child: Text(
+                      "Anlueaza",
+                      style: GoogleFonts.robotoSerif(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    onPressed: () {
+                      Get.close(1);
+                    },
+                  ),
                 ],
               );
             },

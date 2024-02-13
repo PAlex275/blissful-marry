@@ -29,7 +29,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       appBar: AppBar(
         title: Text(
           'Abonamentul Tău',
-          style: GoogleFonts.roboto(
+          style: GoogleFonts.robotoSerif(
             fontWeight: FontWeight.bold,
             color: Colors.black,
             fontSize: 20,
@@ -43,6 +43,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         decoration: const BoxDecoration(color: ivory),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CarouselSlider.builder(
               carouselController: controller,
@@ -54,9 +55,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.6,
                   decoration: BoxDecoration(
-                    color: dustyRose,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+                      color: Colors.white.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                          color: Colors.black.withOpacity(0.1), width: 0.5)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -64,7 +66,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         height: 50,
                         width: MediaQuery.of(context).size.width,
                         decoration: const BoxDecoration(
-                          color: nude,
+                          color: light,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10),
@@ -73,7 +75,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         child: Center(
                           child: Text(
                             subscriptionPlans[itemIndex].name,
-                            style: GoogleFonts.roboto(
+                            style: GoogleFonts.robotoSerif(
                               color: Colors.black,
                               fontSize: 22,
                               fontWeight: FontWeight.w600,
@@ -98,7 +100,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                       'plan de baza'
                                   ? subscriptionPlans[itemIndex].price
                                   : '${subscriptionPlans[itemIndex].price}/Luna',
-                              style: GoogleFonts.roboto(
+                              style: GoogleFonts.robotoSerif(
                                 fontSize: 22,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
@@ -119,8 +121,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                                 .map(
                                   (e) => Text(
                                     '\u2022 $e',
-                                    style: GoogleFonts.roboto(
-                                      fontSize: 16,
+                                    style: GoogleFonts.robotoSerif(
+                                      fontSize: 14,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -146,27 +148,32 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             const SizedBox(
               height: 10,
             ),
-            ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateColor.resolveWith(
-                    (states) => nude,
-                  ),
-                ),
-                onPressed: () {},
-                child: SizedBox(
-                  width: 100,
-                  height: 45,
-                  child: Center(
-                    child: Text(
-                      'Achita',
-                      style: GoogleFonts.roboto(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 20,
+              ),
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateColor.resolveWith(
+                      (states) => nude,
                     ),
                   ),
-                )),
+                  onPressed: () {},
+                  child: SizedBox(
+                    width: 100,
+                    height: 45,
+                    child: Center(
+                      child: Text(
+                        'Achita',
+                        style: GoogleFonts.robotoSerif(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  )),
+            ),
           ],
         ),
       ),

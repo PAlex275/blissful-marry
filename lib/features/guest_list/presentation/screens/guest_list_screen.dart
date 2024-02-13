@@ -24,9 +24,9 @@ class _GuestListScreenState extends State<GuestListScreen> {
   final TextEditingController _darController = TextEditingController();
   final SearchController searchController = SearchController();
   // ignore: no_leading_underscores_for_local_identifiers
-  String _attendAnswerController = "Da";
+  String _attendAnswerController = "Confirmat";
   String _currencyController = 'Lei';
-  final List<String> attendLabels = ["Da", "Neconfirmat"];
+  final List<String> attendLabels = ["Confirmat", "Neconfirmat"];
   final List<String> monede = ['Lei', 'Euro', 'Dolari'];
   final controller = Get.put(AuthController());
   final formKey = GlobalKey<FormState>();
@@ -194,7 +194,7 @@ class _GuestListScreenState extends State<GuestListScreen> {
                                                                       'Confirmare']
                                                                   .toString()
                                                                   .toLowerCase() ==
-                                                              'da'
+                                                              'confirmat'
                                                           ? const Icon(
                                                               Icons
                                                                   .check_circle,
@@ -228,36 +228,36 @@ class _GuestListScreenState extends State<GuestListScreen> {
                                                   ),
                                                   Row(
                                                     children: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                          FirebaseFirestore
-                                                              .instance
-                                                              .collection(
-                                                                  'Users')
-                                                              .doc(controller
-                                                                  .getUser()!
-                                                                  .email)
-                                                              .collection(
-                                                                  "Nunta")
-                                                              .doc("Invitati")
-                                                              .collection(
-                                                                  "Invitati")
-                                                              .doc(resultList[
-                                                                      index]
-                                                                  .id)
-                                                              .delete();
-                                                          getClientStream();
-                                                          setState(() {});
-                                                        },
-                                                        child: const Icon(
-                                                          Icons.edit,
-                                                          color: Colors.black,
-                                                          size: 20,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 5,
-                                                      ),
+                                                      // InkWell(
+                                                      //   onTap: () {
+                                                      //     FirebaseFirestore
+                                                      //         .instance
+                                                      //         .collection(
+                                                      //             'Users')
+                                                      //         .doc(controller
+                                                      //             .getUser()!
+                                                      //             .email)
+                                                      //         .collection(
+                                                      //             "Nunta")
+                                                      //         .doc("Invitati")
+                                                      //         .collection(
+                                                      //             "Invitati")
+                                                      //         .doc(resultList[
+                                                      //                 index]
+                                                      //             .id)
+                                                      //         .delete();
+                                                      //     getClientStream();
+                                                      //     setState(() {});
+                                                      //   },
+                                                      //   child: const Icon(
+                                                      //     Icons.edit,
+                                                      //     color: Colors.black,
+                                                      //     size: 20,
+                                                      //   ),
+                                                      // ),
+                                                      // const SizedBox(
+                                                      //   width: 5,
+                                                      // ),
                                                       InkWell(
                                                         onTap: () {
                                                           FirebaseFirestore
@@ -490,7 +490,6 @@ class _GuestListScreenState extends State<GuestListScreen> {
                                                                                             // ignore: avoid_print
                                                                                             print("Failed to add new Note due to $error")
                                                                                           });
-                                                                                  ;
                                                                                 }
                                                                               },
                                                                               child: Text(
@@ -498,6 +497,19 @@ class _GuestListScreenState extends State<GuestListScreen> {
                                                                                 style: GoogleFonts.robotoSerif(
                                                                                   fontSize: 20,
                                                                                   fontWeight: FontWeight.w400,
+                                                                                  color: Colors.black,
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                            TextButton(
+                                                                              onPressed: () {
+                                                                                Get.close(1);
+                                                                              },
+                                                                              child: Text(
+                                                                                'Anuleaza',
+                                                                                style: GoogleFonts.robotoSerif(
+                                                                                  fontSize: 14,
+                                                                                  fontWeight: FontWeight.w200,
                                                                                   color: Colors.black,
                                                                                 ),
                                                                               ),
@@ -618,8 +630,8 @@ class _GuestListScreenState extends State<GuestListScreen> {
                   TextButton(
                     child: Text(
                       "Adauga",
-                      style: GoogleFonts.roboto(
-                          fontSize: 15,
+                      style: GoogleFonts.robotoSerif(
+                          fontSize: 17,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
                     ),
@@ -650,6 +662,19 @@ class _GuestListScreenState extends State<GuestListScreen> {
                                   print("Failed to add new Note due to $error")
                                 });
                       }
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      "Anuleaza",
+                      style: GoogleFonts.robotoSerif(
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onPressed: () {
+                      Get.close(1);
                     },
                   )
                 ],

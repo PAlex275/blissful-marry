@@ -22,9 +22,10 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
       appBar: AppBar(
         backgroundColor: dustyRose,
         elevation: 0.0,
-        title: Text(widget.doc!["note_title"],
-            style: GoogleFonts.roboto(
+        title: Text(widget.doc!["titlu"],
+            style: GoogleFonts.robotoSerif(
               fontSize: 25,
+              fontWeight: FontWeight.w600,
             )),
       ),
       body: Padding(
@@ -33,34 +34,40 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.doc!["creation_date"],
-              style: GoogleFonts.roboto(
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-                color: dustyRose,
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.doc!["data"],
+                  style: GoogleFonts.robotoSerif(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  widget.doc!["continut"],
+                  style: GoogleFonts.robotoSerif(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 30,
-            ),
-            Text(
-              widget.doc!["note_content"],
-              style: GoogleFonts.roboto(
-                fontSize: 25,
-                fontWeight: FontWeight.w500,
-                color: dustyRose,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
             ),
             InkWell(
               onTap: () {
                 FirebaseFirestore.instance
                     .collection('Users')
                     .doc(controller.getUser()!.email)
-                    .collection("Notes")
+                    .collection("Notite")
                     .doc(widget.doc!.id)
                     .delete();
                 Get.close(1);
@@ -72,18 +79,18 @@ class _NoteReaderScreenState extends State<NoteReaderScreen> {
                       Icons.delete,
                       color: Colors.black,
                     ),
-                    onPressed: () {
-                      FirebaseFirestore.instance
+                    onPressed: () async {
+                      await FirebaseFirestore.instance
                           .collection('Users')
                           .doc(controller.getUser()!.email)
-                          .collection("Notes")
+                          .collection("Notite")
                           .doc(widget.doc!.id)
                           .delete();
                       Get.close(1);
                     },
                   ),
                   Text(
-                    'Delete Note',
+                    'Sterge notita',
                     style: GoogleFonts.roboto(
                       color: Colors.black,
                     ),

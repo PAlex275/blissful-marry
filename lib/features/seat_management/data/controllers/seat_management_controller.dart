@@ -34,7 +34,7 @@ class SeatManagementController extends GetxController {
         .collection("Tables")
         .count()
         .get();
-    int tableIndex = query.count;
+    int tableIndex = query.count!;
     tableIndex++;
     return tableIndex;
   }

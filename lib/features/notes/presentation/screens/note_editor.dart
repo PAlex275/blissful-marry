@@ -27,7 +27,10 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
         elevation: 0.0,
         title: Text(
           'Adauga o notita',
-          style: GoogleFonts.roboto(),
+          style: GoogleFonts.robotoSerif(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       body: Padding(
@@ -38,7 +41,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
-                fillColor: nude,
+                fillColor: light,
                 filled: true,
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 22),
@@ -53,14 +56,15 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
                       BorderSide(color: nude.withOpacity(0.8), width: 1.0),
                 ),
                 hintText: 'Titlu',
-                hintStyle: GoogleFonts.roboto(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16),
-              ),
-              style: GoogleFonts.roboto(
+                hintStyle: GoogleFonts.robotoSerif(
                   color: Colors.black,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
+              style: GoogleFonts.robotoSerif(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
                   fontSize: 16),
             ),
             const SizedBox(
@@ -77,7 +81,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
                 maxLines: null,
                 expands: true,
                 decoration: InputDecoration(
-                  fillColor: nude,
+                  fillColor: light,
                   filled: true,
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 22),
@@ -92,15 +96,15 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
                         BorderSide(color: nude.withOpacity(0.8), width: 1.0),
                   ),
                   hintText: 'Continut...',
-                  hintStyle: GoogleFonts.roboto(
+                  hintStyle: GoogleFonts.robotoSerif(
                     color: Colors.black,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                     fontSize: 16,
                   ),
                 ),
-                style: GoogleFonts.roboto(
+                style: GoogleFonts.robotoSerif(
                   color: Colors.black,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
               ),
@@ -119,11 +123,11 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
             FirebaseFirestore.instance
                 .collection('Users')
                 .doc(controller.getUser()!.email)
-                .collection("Notes")
+                .collection("Notite")
                 .add({
-                  "note_title": _titleController.text,
-                  "creation_date": DateFormat.yMMMEd().format(DateTime.now()),
-                  "note_content": _contentController.text,
+                  "titlu": _titleController.text,
+                  "data": DateFormat.yMMMEd().format(DateTime.now()),
+                  "continut": _contentController.text,
                 })
                 .then((value) => {Get.close(1)})
                 .catchError((error) => {
@@ -131,8 +135,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
                       print("Failed to add new Note due to $error"),
                     });
           },
-          backgroundColor: nude,
-          // isExtended: true,
+          backgroundColor: light,
           child: const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(

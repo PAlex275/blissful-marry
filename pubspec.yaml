@@ -52,6 +52,7 @@ dependencies:
   purchases_flutter: ^6.5.1
   home_widget: ^0.4.1
   carousel_slider: ^4.2.1
+  davinci: ^2.0.0
 
 dev_dependencies:
   flutter_test:

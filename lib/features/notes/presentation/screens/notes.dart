@@ -42,8 +42,8 @@ class NotesScreen extends StatelessWidget {
                 stream: FirebaseFirestore.instance
                     .collection('Users')
                     .doc(controller.getUser()!.email)
-                    .collection("Notes")
-                    .orderBy('creation_date', descending: true)
+                    .collection("Notite")
+                    .orderBy('data', descending: true)
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -54,6 +54,38 @@ class NotesScreen extends StatelessWidget {
                     );
                   }
                   if (snapshot.hasData) {
+                    List<Widget> notes = snapshot.data!.docs
+                        .map(
+                          (note) => noteCard(
+                            () => Get.to(() => NoteReaderScreen(doc: note)),
+                            note,
+                            150,
+                            150,
+                          ),
+                        )
+                        .toList();
+                    notes.add(Container(
+                      padding: const EdgeInsets.all(8),
+                      margin: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: light,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      width: 150,
+                      height: 150,
+                      child: Center(
+                        child: IconButton(
+                          onPressed: () {
+                            Get.to(() => const NoteEditorScreen());
+                          },
+                          icon: const Icon(
+                            Icons.add,
+                            size: 25,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ));
                     return snapshot.data!.docs.isEmpty
                         ? Center(
                             child: Text(
@@ -70,17 +102,7 @@ class NotesScreen extends StatelessWidget {
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                             ),
-                            children: snapshot.data!.docs
-                                .map(
-                                  (note) => noteCard(
-                                    () => Get.to(
-                                        () => NoteReaderScreen(doc: note)),
-                                    note,
-                                    150,
-                                    150,
-                                  ),
-                                )
-                                .toList(),
+                            children: notes,
                           );
                   }
                   return Text(
@@ -95,16 +117,6 @@ class NotesScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-          elevation: 0,
-          backgroundColor: nude,
-          onPressed: () {
-            Get.to(() => const NoteEditorScreen());
-          },
-          label: const Icon(
-            Icons.add,
-            size: 25,
-          )),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:blissful_marry/core/style/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSize {
   const CustomAppBar({
@@ -12,6 +13,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSize {
     return AppBar(
       backgroundColor: dustyRose,
       toolbarHeight: 70,
+      title: Text(
+        'Blissful Marry',
+        style: GoogleFonts.robotoSerif(
+          fontSize: 23,
+          fontWeight: FontWeight.w700,
+          color: Colors.white,
+        ),
+      ),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 5),

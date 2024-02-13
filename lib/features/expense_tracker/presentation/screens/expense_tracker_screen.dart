@@ -45,9 +45,9 @@ class ExpenseTrackerScreen extends StatelessWidget {
             stream: FirebaseFirestore.instance
                 .collection('Users')
                 .doc(controller.getUser()!.email)
-                .collection("Wedding")
-                .doc("Expenses")
-                .collection("Expenses")
+                .collection("Nunta")
+                .doc("Cheltuieli")
+                .collection("Cheltuieli")
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -60,7 +60,7 @@ class ExpenseTrackerScreen extends StatelessWidget {
               if (snapshot.hasData) {
                 expenseTotalAmount = 0;
                 snapshot.data!.docs.toList().forEach((element) {
-                  expenseTotalAmount += element["expense_amount"];
+                  expenseTotalAmount += element["suma"];
                 });
                 if (expenseTotalAmount > 0) {
                   return Column(
@@ -318,21 +318,17 @@ class ExpenseTrackerScreen extends StatelessWidget {
                                                       .doc(controller
                                                           .getUser()!
                                                           .email)
-                                                      .collection("Wedding")
-                                                      .doc("Expenses")
-                                                      .collection("Expenses")
+                                                      .collection("Nunta")
+                                                      .doc("Cheltuieli")
+                                                      .collection("Cheltuieli")
                                                       .add({
-                                                    "expense_title":
-                                                        _title.text,
-                                                    "expense_description":
+                                                    "titlu": _title.text,
+                                                    "descriere":
                                                         _description.text,
-                                                    "expense_amount":
-                                                        int.tryParse(
-                                                            _amount.text),
-                                                    "expense_date":
-                                                        DateFormat.yMMMEd()
-                                                            .format(
-                                                                DateTime.now()),
+                                                    "suma": int.tryParse(
+                                                        _amount.text),
+                                                    "data": DateFormat.yMMMEd()
+                                                        .format(DateTime.now()),
                                                   }).then((value) => {
                                                             _amount.clear(),
                                                             _title.clear(),
@@ -467,7 +463,7 @@ class ExpenseTrackerScreen extends StatelessWidget {
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Text(
-                                              expenses[index]["expense_title"],
+                                              expenses[index]["titlu"],
                                               style: GoogleFonts.robotoSerif(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w500,
@@ -475,7 +471,7 @@ class ExpenseTrackerScreen extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '${expenses[index]["expense_amount"]} lei',
+                                              '${expenses[index]["suma"]} lei',
                                               style: GoogleFonts.robotoSerif(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w500,
@@ -492,8 +488,7 @@ class ExpenseTrackerScreen extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                expenses[index]
-                                                    ["expense_description"],
+                                                expenses[index]["descriere"],
                                                 style: GoogleFonts.robotoSerif(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w300,
@@ -507,9 +502,9 @@ class ExpenseTrackerScreen extends StatelessWidget {
                                                       .doc(controller
                                                           .getUser()!
                                                           .email)
-                                                      .collection("Wedding")
-                                                      .doc("Expenses")
-                                                      .collection("Expenses")
+                                                      .collection("Nunta")
+                                                      .doc("Cheltuieli")
+                                                      .collection("Cheltuieli")
                                                       .doc(expenses[index].id)
                                                       .delete();
                                                 },
@@ -780,22 +775,20 @@ class ExpenseTrackerScreen extends StatelessWidget {
                                                           .doc(controller
                                                               .getUser()!
                                                               .email)
-                                                          .collection("Wedding")
-                                                          .doc("Expenses")
+                                                          .collection("Nunta")
+                                                          .doc("Cheltuieli")
                                                           .collection(
-                                                              "Expenses")
+                                                              "Cheltuieli")
                                                           .add({
-                                                        "expense_title":
-                                                            _title.text,
-                                                        "expense_description":
+                                                        "titlu": _title.text,
+                                                        "descriere":
                                                             _description.text,
-                                                        "expense_amount":
-                                                            int.tryParse(
-                                                                _amount.text),
-                                                        "expense_date":
-                                                            DateFormat.yMMMEd()
-                                                                .format(DateTime
-                                                                    .now()),
+                                                        "suma": int.tryParse(
+                                                            _amount.text),
+                                                        "data": DateFormat
+                                                                .yMMMEd()
+                                                            .format(
+                                                                DateTime.now()),
                                                       }).then((value) => {
                                                                 _amount.clear(),
                                                                 _title.clear(),

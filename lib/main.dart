@@ -24,24 +24,27 @@ class MyApp extends StatelessWidget {
       title: 'Blissful Marry',
       theme: ThemeData(
         useMaterial3: true,
-        primaryColor: dustyRose,
+        primaryColor: light,
         colorScheme: ColorScheme.dark(
-          primary: Colors.white.withOpacity(0.9),
-          background: dustyRose,
+          primary: Colors.black.withOpacity(0.1),
+          background: light,
         ),
         datePickerTheme: DatePickerThemeData(
-          backgroundColor: dustyRose,
-          dayOverlayColor: MaterialStateProperty.all(Colors.white),
+          backgroundColor: light,
+          dayOverlayColor:
+              MaterialStateProperty.all(Colors.black.withOpacity(0.5)),
           confirmButtonStyle: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(dustyRose),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: MaterialStateProperty.all<Color>(light),
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
           ),
           cancelButtonStyle: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(dustyRose),
-            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+            backgroundColor: MaterialStateProperty.all<Color>(light),
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
           ),
-          todayBackgroundColor: MaterialStateProperty.all(dustyRose),
-          todayForegroundColor: MaterialStateProperty.all(nude),
+          todayBorder: BorderSide.none,
+          todayBackgroundColor:
+              MaterialStateProperty.all(light.withOpacity(0.4)),
+          todayForegroundColor: MaterialStateProperty.all(Colors.black),
         ),
       ),
       getPages: AppRoutes.routes(),
