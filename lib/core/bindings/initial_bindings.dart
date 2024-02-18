@@ -8,6 +8,7 @@ class InitialBindings implements Bindings {
   void dependencies() {
     Get.put(AuthController(), permanent: true);
     Get.put(HomeController());
+    // Get.put(LimitControllers());
     // Get.put(SeatManagementController());
   }
 }

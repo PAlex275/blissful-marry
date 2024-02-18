@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:blissful_marry/core/alerts/subscription_alert.dart';
+import 'package:blissful_marry/core/controllers/subscription_controller.dart';
 import 'package:blissful_marry/core/style/colors.dart';
 import 'package:blissful_marry/features/login/data/controllers/auth_controller.dart';
 import 'package:blissful_marry/features/seat_management/data/controllers/seat_management_controller.dart';
@@ -24,6 +26,7 @@ class _SeatManagementState extends State<SeatManagement> {
 
   final authController = Get.put(AuthController());
   final controller = Get.put(SeatManagementController());
+  final subscriptionController = Get.put(SubscriptionController());
   final SearchController searchController = SearchController();
   late int tableID;
   late Timer timer;
@@ -128,26 +131,226 @@ class _SeatManagementState extends State<SeatManagement> {
                   vertical: 10,
                   horizontal: 15,
                 ),
-                child: SizedBox(
-                  height: 50,
-                  child: CupertinoSearchTextField(
-                    placeholder: 'Cautati...',
-                    prefixIcon: const Icon(
-                      Icons.search,
-                      size: 25,
-                      color: Colors.black,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: 42,
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child: CupertinoSearchTextField(
+                        placeholder: 'Cautati...',
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          size: 25,
+                          color: Colors.black,
+                        ),
+                        suffixIcon: const Icon(
+                          Icons.close,
+                          color: Colors.black,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        controller: searchController,
+                      ),
                     ),
-                    suffixIcon: const Icon(
-                      Icons.close,
-                      color: Colors.black,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: light,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      width: 42,
+                      height: 42,
+                      child: InkWell(
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.black,
+                          size: 25,
+                        ),
+                        onTap: () {
+                          allResults.length <
+                                  subscriptionController.getMaximMese()
+                              ? showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      backgroundColor: light,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
+                                        ),
+                                      ),
+                                      scrollable: true,
+                                      title: Text(
+                                        'Masa',
+                                        style: GoogleFonts.robotoSerif(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      content: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Form(
+                                          child: Column(
+                                            children: <Widget>[
+                                              Form(
+                                                key: formKey,
+                                                child: TextFormField(
+                                                  style:
+                                                      GoogleFonts.robotoSerif(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.black,
+                                                  ),
+                                                  controller: nameController,
+                                                  validator: (text) {
+                                                    if (text == null ||
+                                                        text.isEmpty) {
+                                                      return 'Acest camp nu poate fi gol';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  cursorColor: Colors.black,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Nume Masa',
+                                                    labelStyle:
+                                                        GoogleFonts.robotoSerif(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      color: Colors.black,
+                                                    ),
+                                                    icon: const Icon(
+                                                      Icons.account_box,
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 30,
+                                              ),
+                                              Text(
+                                                'Locuri',
+                                                style: GoogleFonts.robotoSerif(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w300,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                child: DropdownButtonFormField(
+                                                  dropdownColor: light,
+                                                  elevation: 2,
+                                                  value: tableSize,
+                                                  icon: const Icon(
+                                                    Icons.keyboard_arrow_down,
+                                                    color: Colors.black,
+                                                  ),
+                                                  items: SeatManagement.items
+                                                      .map((int item) {
+                                                    return DropdownMenuItem<
+                                                        int>(
+                                                      value: item,
+                                                      child: Text(
+                                                        item.toString(),
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged: (int? newValue) {
+                                                    tableSize = newValue!;
+                                                    setState(() {
+                                                      tableSize;
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          child: Text(
+                                            "Anlueaza",
+                                            style: GoogleFonts.robotoSerif(
+                                                fontSize: 13,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          onPressed: () {
+                                            Get.close(1);
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text(
+                                            "Adauga",
+                                            style: GoogleFonts.robotoSerif(
+                                                fontSize: 15,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          onPressed: () {
+                                            if (formKey.currentState!
+                                                .validate()) {
+                                              FirebaseFirestore.instance
+                                                  .collection('Users')
+                                                  .doc(authController
+                                                      .getUser()!
+                                                      .email)
+                                                  .collection("Nunta")
+                                                  .doc("Mese")
+                                                  .collection("Mese")
+                                                  .add({
+                                                    "NumeMasa":
+                                                        nameController.text,
+                                                    "Marime": tableSize,
+                                                    "IDMasa": tableID,
+                                                    "Invitati": [],
+                                                  })
+                                                  .then((value) => {
+                                                        nameController.clear(),
+                                                        Get.close(1),
+                                                        getClientStream(),
+                                                        setState(() {}),
+                                                      })
+                                                  .catchError((error) => {
+                                                        // ignore: avoid_print
+                                                        print(
+                                                            "Failed to add new Note due to $error")
+                                                      });
+                                            }
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                )
+                              : showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return const SubscriptionAlert(
+                                        categorie: 'mese');
+                                  },
+                                );
+                        },
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.black.withOpacity(0.7)),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(10)),
-                    controller: searchController,
-                  ),
+                  ],
                 ),
               ),
               Padding(
@@ -195,169 +398,6 @@ class _SeatManagementState extends State<SeatManagement> {
               ),
             ],
           ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0,
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                backgroundColor: light,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                scrollable: true,
-                title: Text(
-                  'Masa',
-                  style: GoogleFonts.robotoSerif(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
-                ),
-                content: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Form(
-                    child: Column(
-                      children: <Widget>[
-                        Form(
-                          key: formKey,
-                          child: TextFormField(
-                            style: GoogleFonts.robotoSerif(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                            controller: nameController,
-                            validator: (text) {
-                              if (text == null || text.isEmpty) {
-                                return 'Acest camp nu poate fi gol';
-                              }
-                              return null;
-                            },
-                            cursorColor: Colors.black,
-                            decoration: InputDecoration(
-                              labelText: 'Nume Masa',
-                              labelStyle: GoogleFonts.robotoSerif(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.black,
-                              ),
-                              icon: const Icon(
-                                Icons.account_box,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Text(
-                          'Locuri',
-                          style: GoogleFonts.robotoSerif(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: DropdownButtonFormField(
-                            dropdownColor: light,
-                            elevation: 2,
-                            value: tableSize,
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.black,
-                            ),
-                            items: SeatManagement.items.map((int item) {
-                              return DropdownMenuItem<int>(
-                                value: item,
-                                child: Text(
-                                  item.toString(),
-                                  style: GoogleFonts.robotoSerif(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w300,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (int? newValue) {
-                              tableSize = newValue!;
-                              setState(() {
-                                tableSize;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                actions: [
-                  TextButton(
-                    child: Text(
-                      "Adauga",
-                      style: GoogleFonts.robotoSerif(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        FirebaseFirestore.instance
-                            .collection('Users')
-                            .doc(authController.getUser()!.email)
-                            .collection("Nunta")
-                            .doc("Mese")
-                            .collection("Mese")
-                            .add({
-                              "NumeMasa": nameController.text,
-                              "Marime": tableSize,
-                              "IDMasa": tableID,
-                              "Invitati": [],
-                            })
-                            .then((value) => {
-                                  nameController.clear(),
-                                  Get.close(1),
-                                  getClientStream(),
-                                  setState(() {}),
-                                })
-                            .catchError((error) => {
-                                  // ignore: avoid_print
-                                  print("Failed to add new Note due to $error")
-                                });
-                      }
-                    },
-                  ),
-                  TextButton(
-                    child: Text(
-                      "Anlueaza",
-                      style: GoogleFonts.robotoSerif(
-                          fontSize: 13,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    onPressed: () {
-                      Get.close(1);
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        },
-        backgroundColor: dustyRose,
-        child: const Icon(
-          Icons.add,
-          size: 26,
-          color: Colors.white,
         ),
       ),
     );

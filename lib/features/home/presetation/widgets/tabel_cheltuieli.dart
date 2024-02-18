@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:blissful_marry/core/alerts/subscription_alert.dart';
+import 'package:blissful_marry/core/controllers/subscription_controller.dart';
 import 'package:blissful_marry/core/style/colors.dart';
 import 'package:blissful_marry/features/login/data/controllers/auth_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +18,7 @@ class TabelCheltuieli extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(AuthController());
+    final subscriptionController = Get.put(SubscriptionController());
     TextEditingController _title = TextEditingController();
     // ignore: no_leading_underscores_for_local_identifiers
     TextEditingController _description = TextEditingController();
@@ -148,299 +151,350 @@ class TabelCheltuieli extends StatelessWidget {
                         ),
                         child: Container(
                           height: 40,
+                          width: 400,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: Colors.white.withOpacity(0.5),
                           ),
-                          child: Center(
-                            child: InkWell(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      backgroundColor: light,
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(26.0))),
-                                      contentPadding:
-                                          const EdgeInsets.only(top: 10.0),
-                                      content: SizedBox(
-                                        width: 400.0,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            const SizedBox(
-                                              height: 10.0,
-                                            ),
-                                            Row(
+                          child: InkWell(
+                            onTap: () {
+                              snapshot.data!.docs.length <
+                                      subscriptionController
+                                          .getMaximCheltuieli()
+                                  ? showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          backgroundColor: light,
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(26.0))),
+                                          contentPadding:
+                                              const EdgeInsets.only(top: 10.0),
+                                          content: SizedBox(
+                                            width: 400.0,
+                                            child: Column(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
-                                                Text(
-                                                  "Adaugare cheltuiala",
-                                                  style:
-                                                      GoogleFonts.robotoSerif(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
+                                                const SizedBox(
+                                                  height: 10.0,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      "Adaugare cheltuiala",
+                                                      style: GoogleFonts
+                                                          .robotoSerif(
+                                                        color: Colors.black,
+                                                        fontSize: 20,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  height: 15.0,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 30.0,
+                                                          right: 30.0),
+                                                  child: TextField(
+                                                    style:
+                                                        GoogleFonts.robotoSerif(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 16,
+                                                    ),
+                                                    controller: _title,
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    decoration: InputDecoration(
+                                                      hintText: "Titlu",
+                                                      hintStyle: GoogleFonts
+                                                          .robotoSerif(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.8),
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                      labelStyle:
+                                                          GoogleFonts.roboto(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    maxLines: 1,
+                                                    cursorColor: Colors.black,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 8.0,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 30.0,
+                                                          right: 30.0),
+                                                  child: TextField(
+                                                    controller: _description,
+                                                    style:
+                                                        GoogleFonts.robotoSerif(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 16,
+                                                    ),
+                                                    cursorColor: Colors.black,
+                                                    keyboardType:
+                                                        TextInputType.text,
+                                                    decoration: InputDecoration(
+                                                      hintText: "Descriere",
+                                                      hintStyle: GoogleFonts
+                                                          .robotoSerif(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.8),
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                      labelStyle:
+                                                          GoogleFonts.roboto(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    maxLines: 1,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 8.0,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 30.0,
+                                                          right: 30.0),
+                                                  child: TextField(
+                                                    style:
+                                                        GoogleFonts.robotoSerif(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 16,
+                                                    ),
+                                                    cursorColor: Colors.black,
+                                                    controller: _amount,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    decoration: InputDecoration(
+                                                      suffix: Text(
+                                                        'Lei',
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      hintText: "Suma",
+                                                      hintStyle: GoogleFonts
+                                                          .robotoSerif(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.8),
+                                                              ),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                      labelStyle:
+                                                          GoogleFonts.roboto(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                    ),
+                                                    textInputAction:
+                                                        TextInputAction.done,
+                                                    maxLines: 1,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 15.0,
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    expenseTotalAmount = 0;
+                                                    if (_amount.text != '' &&
+                                                        _title.text != '') {
+                                                      FirebaseFirestore.instance
+                                                          .collection('Users')
+                                                          .doc(controller
+                                                              .getUser()!
+                                                              .email)
+                                                          .collection("Nunta")
+                                                          .doc("Cheltuieli")
+                                                          .collection(
+                                                              "Cheltuieli")
+                                                          .add({
+                                                        "titlu": _title.text,
+                                                        "descriere":
+                                                            _description.text,
+                                                        "suma": int.tryParse(
+                                                            _amount.text),
+                                                        "data": DateFormat
+                                                                .yMMMEd()
+                                                            .format(
+                                                                DateTime.now()),
+                                                      }).then((value) => {
+                                                                _amount.clear(),
+                                                                _title.clear(),
+                                                                _description
+                                                                    .clear(),
+                                                                Get.close(1)
+                                                              });
+                                                    }
+                                                  },
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 50,
+                                                      right: 50,
+                                                      bottom: 3,
+                                                    ),
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 15.0,
+                                                              bottom: 15.0),
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Colors.transparent,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
+                                                      child: Text(
+                                                        "Adauga",
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 18,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                    left: 40.0,
+                                                    right: 40,
+                                                    bottom: 10,
+                                                  ),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      Get.close(1);
+                                                    },
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 10.0,
+                                                              bottom: 15.0),
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Colors.transparent,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                      ),
+                                                      child: Text(
+                                                        "Cancel",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            const SizedBox(
-                                              height: 15.0,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 30.0, right: 30.0),
-                                              child: TextField(
-                                                style: GoogleFonts.robotoSerif(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 16,
-                                                ),
-                                                controller: _title,
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                decoration: InputDecoration(
-                                                  hintText: "Titlu",
-                                                  hintStyle:
-                                                      GoogleFonts.robotoSerif(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16,
-                                                  ),
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: Colors.black
-                                                            .withOpacity(0.8),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  labelStyle:
-                                                      GoogleFonts.roboto(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                maxLines: 1,
-                                                cursorColor: Colors.black,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 8.0,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 30.0, right: 30.0),
-                                              child: TextField(
-                                                controller: _description,
-                                                style: GoogleFonts.robotoSerif(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 16,
-                                                ),
-                                                cursorColor: Colors.black,
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                decoration: InputDecoration(
-                                                  hintText: "Descriere",
-                                                  hintStyle:
-                                                      GoogleFonts.robotoSerif(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16,
-                                                  ),
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: Colors.black
-                                                            .withOpacity(0.8),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  labelStyle:
-                                                      GoogleFonts.roboto(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                maxLines: 1,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 8.0,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 30.0, right: 30.0),
-                                              child: TextField(
-                                                style: GoogleFonts.robotoSerif(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 16,
-                                                ),
-                                                cursorColor: Colors.black,
-                                                controller: _amount,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                decoration: InputDecoration(
-                                                  suffix: Text(
-                                                    'Lei',
-                                                    style:
-                                                        GoogleFonts.robotoSerif(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                  hintText: "Suma",
-                                                  hintStyle:
-                                                      GoogleFonts.robotoSerif(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16,
-                                                  ),
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color: Colors.black
-                                                            .withOpacity(0.8),
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10)),
-                                                  labelStyle:
-                                                      GoogleFonts.roboto(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 16,
-                                                  ),
-                                                ),
-                                                textInputAction:
-                                                    TextInputAction.done,
-                                                maxLines: 1,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 15.0,
-                                            ),
-                                            InkWell(
-                                              onTap: () {
-                                                expenseTotalAmount = 0;
-                                                if (_amount.text != '' &&
-                                                    _title.text != '') {
-                                                  FirebaseFirestore.instance
-                                                      .collection('Users')
-                                                      .doc(controller
-                                                          .getUser()!
-                                                          .email)
-                                                      .collection("Nunta")
-                                                      .doc("Cheltuieli")
-                                                      .collection("Cheltuieli")
-                                                      .add({
-                                                    "titlu": _title.text,
-                                                    "descriere":
-                                                        _description.text,
-                                                    "suma": int.tryParse(
-                                                        _amount.text),
-                                                    "data": DateFormat.yMMMEd()
-                                                        .format(DateTime.now()),
-                                                  }).then((value) => {
-                                                            _amount.clear(),
-                                                            _title.clear(),
-                                                            _description
-                                                                .clear(),
-                                                            Get.close(1)
-                                                          });
-                                                }
-                                              },
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                  left: 50,
-                                                  right: 50,
-                                                  bottom: 3,
-                                                ),
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 15.0,
-                                                          bottom: 15.0),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.transparent,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                  child: Text(
-                                                    "Adauga",
-                                                    style:
-                                                        GoogleFonts.robotoSerif(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 18,
-                                                    ),
-                                                    textAlign: TextAlign.center,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                left: 40.0,
-                                                right: 40,
-                                                bottom: 10,
-                                              ),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  Get.close(1);
-                                                },
-                                                child: Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10.0,
-                                                          bottom: 15.0),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.transparent,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                  child: Text(
-                                                    "Cancel",
-                                                    textAlign: TextAlign.center,
-                                                    style:
-                                                        GoogleFonts.robotoSerif(
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 15,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.black,
-                                size: 16,
-                              ),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return const SubscriptionAlert(
+                                            categorie: 'Cheltuieli');
+                                      });
+                            },
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.black,
+                              size: 16,
                             ),
                           ),
                         ),
@@ -472,6 +526,361 @@ class TabelCheltuieli extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.white.withOpacity(0.5),
+                          ),
+                          child: Center(
+                            child: InkWell(
+                              onTap: () {
+                                snapshot.data!.docs.length <
+                                        subscriptionController
+                                            .getMaximCheltuieli()
+                                    ? showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            backgroundColor: light,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(26.0))),
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    top: 10.0),
+                                            content: SizedBox(
+                                              width: 400.0,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: <Widget>[
+                                                  const SizedBox(
+                                                    height: 10.0,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        "Adaugare cheltuiala",
+                                                        style: GoogleFonts
+                                                            .robotoSerif(
+                                                          color: Colors.black,
+                                                          fontSize: 20,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 15.0,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 30.0,
+                                                            right: 30.0),
+                                                    child: TextField(
+                                                      style: GoogleFonts
+                                                          .robotoSerif(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                      controller: _title,
+                                                      keyboardType:
+                                                          TextInputType.text,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: "Titlu",
+                                                        hintStyle: GoogleFonts
+                                                            .robotoSerif(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16,
+                                                        ),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .black
+                                                                      .withOpacity(
+                                                                          0.8),
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10)),
+                                                        labelStyle:
+                                                            GoogleFonts.roboto(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                      maxLines: 1,
+                                                      cursorColor: Colors.black,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8.0,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 30.0,
+                                                            right: 30.0),
+                                                    child: TextField(
+                                                      controller: _description,
+                                                      style: GoogleFonts
+                                                          .robotoSerif(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                      cursorColor: Colors.black,
+                                                      keyboardType:
+                                                          TextInputType.text,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        hintText: "Descriere",
+                                                        hintStyle: GoogleFonts
+                                                            .robotoSerif(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16,
+                                                        ),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .black
+                                                                      .withOpacity(
+                                                                          0.8),
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10)),
+                                                        labelStyle:
+                                                            GoogleFonts.roboto(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                      maxLines: 1,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 8.0,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 30.0,
+                                                            right: 30.0),
+                                                    child: TextField(
+                                                      style: GoogleFonts
+                                                          .robotoSerif(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 16,
+                                                      ),
+                                                      cursorColor: Colors.black,
+                                                      controller: _amount,
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        suffix: Text(
+                                                          'Lei',
+                                                          style: GoogleFonts
+                                                              .robotoSerif(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                        hintText: "Suma",
+                                                        hintStyle: GoogleFonts
+                                                            .robotoSerif(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16,
+                                                        ),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .black
+                                                                      .withOpacity(
+                                                                          0.8),
+                                                                ),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10)),
+                                                        labelStyle:
+                                                            GoogleFonts.roboto(
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                      textInputAction:
+                                                          TextInputAction.done,
+                                                      maxLines: 1,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 15.0,
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      expenseTotalAmount = 0;
+                                                      if (_amount.text != '' &&
+                                                          _title.text != '') {
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection('Users')
+                                                            .doc(controller
+                                                                .getUser()!
+                                                                .email)
+                                                            .collection("Nunta")
+                                                            .doc("Cheltuieli")
+                                                            .collection(
+                                                                "Cheltuieli")
+                                                            .add({
+                                                          "titlu": _title.text,
+                                                          "descriere":
+                                                              _description.text,
+                                                          "suma": int.tryParse(
+                                                              _amount.text),
+                                                          "data": DateFormat
+                                                                  .yMMMEd()
+                                                              .format(DateTime
+                                                                  .now()),
+                                                        }).then((value) => {
+                                                                  _amount
+                                                                      .clear(),
+                                                                  _title
+                                                                      .clear(),
+                                                                  _description
+                                                                      .clear(),
+                                                                  Get.close(1)
+                                                                });
+                                                      }
+                                                    },
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                        left: 50,
+                                                        right: 50,
+                                                        bottom: 3,
+                                                      ),
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                top: 15.0,
+                                                                bottom: 15.0),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors
+                                                              .transparent,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        child: Text(
+                                                          "Adauga",
+                                                          style: GoogleFonts
+                                                              .robotoSerif(
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 18,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 40.0,
+                                                      right: 40,
+                                                      bottom: 10,
+                                                    ),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        Get.close(1);
+                                                      },
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                                top: 10.0,
+                                                                bottom: 15.0),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors
+                                                              .transparent,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        child: Text(
+                                                          "Cancel",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: GoogleFonts
+                                                              .robotoSerif(
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 15,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return const SubscriptionAlert(
+                                              categorie: 'cheltuieli');
+                                        });
+                              },
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.black,
+                                size: 16,
+                              ),
+                            ),
                           ),
                         ),
                       ),

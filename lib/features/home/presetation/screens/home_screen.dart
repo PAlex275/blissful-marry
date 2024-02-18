@@ -35,7 +35,7 @@ class HomeScreen extends GetView<AuthController> {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: 20,
+                    vertical: 10,
                   ),
                   child: DaysCounter(),
                 ),
@@ -47,7 +47,7 @@ class HomeScreen extends GetView<AuthController> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    bottom: 20,
+                    bottom: 30,
                   ),
                   child: AdaugareInvitat(),
                 ),

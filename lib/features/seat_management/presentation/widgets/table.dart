@@ -192,6 +192,19 @@ class _WeddingTableState extends State<WeddingTable> {
                               ),
                               actions: [
                                 TextButton(
+                                  onPressed: () {
+                                    Get.close(1);
+                                  },
+                                  child: Text(
+                                    'Anuleaza',
+                                    style: GoogleFonts.robotoSerif(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                                TextButton(
                                   child: Text(
                                     "Actualizeaza",
                                     style: GoogleFonts.robotoSerif(
@@ -228,19 +241,6 @@ class _WeddingTableState extends State<WeddingTable> {
                                               });
                                     }
                                   },
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Get.close(1);
-                                  },
-                                  child: Text(
-                                    'Anuleaza',
-                                    style: GoogleFonts.robotoSerif(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
                                 ),
                               ],
                             );
@@ -438,6 +438,19 @@ class _WeddingTableState extends State<WeddingTable> {
                                   actions: [
                                     TextButton(
                                       child: Text(
+                                        "Anuleaza",
+                                        style: GoogleFonts.robotoSerif(
+                                          fontSize: 13,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Get.close(1);
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text(
                                         "Adauga",
                                         style: GoogleFonts.robotoSerif(
                                           fontSize: 15,
@@ -468,19 +481,6 @@ class _WeddingTableState extends State<WeddingTable> {
                                                         "Failed to add new Note due to $error")
                                                   });
                                         }
-                                      },
-                                    ),
-                                    TextButton(
-                                      child: Text(
-                                        "Anuleaza",
-                                        style: GoogleFonts.robotoSerif(
-                                          fontSize: 13,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        Get.close(1);
                                       },
                                     ),
                                   ],

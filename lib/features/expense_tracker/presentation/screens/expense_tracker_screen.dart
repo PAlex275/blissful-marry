@@ -411,10 +411,16 @@ class ExpenseTrackerScreen extends StatelessWidget {
                                   },
                                 );
                               },
-                              child: const Icon(
-                                Icons.add_box_rounded,
-                                color: dustyRose,
-                                size: 30,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: light,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.black,
+                                  size: 30,
+                                ),
                               ),
                             ),
                           )

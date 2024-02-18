@@ -46,8 +46,11 @@ class AuthController extends GetxController {
           idToken: _authAccount.idToken,
           accessToken: _authAccount.accessToken,
         );
-        await _auth.signInWithCredential(_credentials);
-        await saveUser(account);
+
+        final UserCredential authResult =
+            await _auth.signInWithCredential(_credentials);
+
+        await saveUser(account, authResult.additionalUserInfo!.isNewUser);
         navigateToHomePage();
       }
     } on Exception catch (error) {
@@ -64,12 +67,19 @@ class AuthController extends GetxController {
     return _expenseTotalAmount;
   }
 
-  saveUser(GoogleSignInAccount account) async {
-    userRF.doc(account.email).set({
-      "email": account.email,
-      "name": account.displayName,
-      "profilepic": account.photoUrl,
-    });
+  saveUser(GoogleSignInAccount account, bool isNew) async {
+    isNew
+        ? userRF.doc(account.email).set({
+            "email": account.email,
+            "name": account.displayName,
+            "profilepic": account.photoUrl,
+            "subscription": "base",
+          })
+        : userRF.doc(account.email).set({
+            "email": account.email,
+            "name": account.displayName,
+            "profilepic": account.photoUrl,
+          });
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 

@@ -21,7 +21,7 @@ class DaysCounter extends GetView<AuthController> {
       height: 120,
       decoration: BoxDecoration(
         color: light,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Stack(
         children: [
