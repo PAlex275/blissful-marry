@@ -40,7 +40,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: const BoxDecoration(color: ivory),
+        decoration: BoxDecoration(
+          color: ivory,
+          borderRadius: BorderRadius.circular(5),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,8 +58,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.6,
                   decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.5),
-                      borderRadius: BorderRadius.circular(5),
+                      color: light,
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                           color: Colors.black.withOpacity(0.1), width: 0.5)),
                   child: Column(
@@ -66,7 +69,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         height: 50,
                         width: MediaQuery.of(context).size.width,
                         decoration: const BoxDecoration(
-                          color: light,
+                          color: dustyRose,
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10),
@@ -150,25 +153,25 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                bottom: 20,
+                bottom: 30,
               ),
               child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateColor.resolveWith(
-                      (states) => nude,
+                      (states) => dustyRose,
                     ),
                   ),
                   onPressed: () {},
                   child: SizedBox(
-                    width: 100,
+                    width: 150,
                     height: 45,
                     child: Center(
                       child: Text(
                         'Achita',
                         style: GoogleFonts.robotoSerif(
                           color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),

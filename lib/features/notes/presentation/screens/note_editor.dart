@@ -116,7 +116,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
         ),
       ),
       floatingActionButton: SizedBox(
-        width: 100,
+        width: 150,
         child: FloatingActionButton(
           elevation: 0,
           onPressed: () {
@@ -149,6 +149,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

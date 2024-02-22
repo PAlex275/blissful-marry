@@ -7,8 +7,8 @@ final List<Plan> subscriptionPlans = [
     details: [
       'Urmarirea bugetului si gestionarea cheltuielilor de bază.',
       'Funcționalitate de luare a notițelor',
-      'Gestionarea listei de invitați cu o limită de 50 de persoane.',
-      'Aranjarea de locuri pentru până la 5 mese.'
+      'Gestionarea listei de invitați cu o limită de 30 de persoane.',
+      'Aranjarea de locuri pentru până la 3 mese.'
     ],
   ),
   Plan(
@@ -17,8 +17,8 @@ final List<Plan> subscriptionPlans = [
     details: [
       'Instrumente avansate pentru buget și urmărire cheltuieli.',
       'Funcționalități îmbunătățite de luare a notițelor',
-      'Gestionarea listei de invitați cu o limită de 150 de persoane',
-      'Aranjament de locuri pentru până la 10 mese',
+      'Gestionarea listei de invitați cu o limită de 80 de persoane',
+      'Aranjament de locuri pentru până la 8 mese',
     ],
   ),
   Plan(

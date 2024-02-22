@@ -15,7 +15,7 @@ class SubscriptionController extends GetxController {
   getMaximMese() {
     late int maximMese;
     if (subscriptionPlan == 'base') {
-      maximMese = 5;
+      maximMese = 3;
     } else if (subscriptionPlan == 'advanced') {
       maximMese = 8;
     } else if (subscriptionPlan == 'premium') {
@@ -27,9 +27,9 @@ class SubscriptionController extends GetxController {
   getMaximInvitati() {
     late int maximInvitati;
     if (subscriptionPlan == 'base') {
-      maximInvitati = 20;
+      maximInvitati = 30;
     } else if (subscriptionPlan == 'advanced') {
-      maximInvitati = 20;
+      maximInvitati = 80;
     } else if (subscriptionPlan == 'premium') {
       maximInvitati = 9999;
     }
